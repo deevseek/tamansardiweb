@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #101010;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: theme('fontFamily.body');
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-display font-semibold text-secondary mb-6 text-center;
+}
+
+.section-subtitle {
+  @apply text-lg text-gray-600 max-w-2xl mx-auto text-center;
+}
+
+.container-responsive {
+  @apply w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+}

@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum PackageCategory {
+  OUTBOND
+  VILLA
+  HALL
+}
+
+enum EventStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model Package {
+  id          Int              @id @default(autoincrement())
+  title       String
+  category    PackageCategory
+  description String
+  facilities  String[]
+  duration    String?
+  capacity    Int?
+  price       Int
+  imageUrl    String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  events      EventRequest[]
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  company   String
+  message   String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now())
+}
+
+model EventRequest {
+  id          Int         @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String
+  date        DateTime
+  message     String?
+  status      EventStatus @default(PENDING)
+  package     Package     @relation(fields: [packageId], references: [id])
+  packageId   Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
